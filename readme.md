@@ -22,24 +22,27 @@ NebulaPalooza is a fictional festival held in Prague, June 4–6, 2026, blending
 
 ```
 /
+├── progress-03.md          # Progress report for Seminar 4
 ├── web/
 │   ├── index.html          # Home — countdown, carousel, highlights
-│   ├── programme.html      # 3-day schedule across both venues
+│   ├── programme.html      # 3-day schedule, two venue columns per day
 │   ├── performers.html     # Directory of 60+ performers + spotlights
 │   ├── practical.html      # Venues, transport, accommodation, tickets
+│   ├── custom_list.html    # My Programme — saved events
 │   ├── style.css           # Single external stylesheet (no frameworks)
 │   ├── carousel.js         # Image carousel
 │   ├── countdown.js        # Countdown to festival opening
-│   └── images/
+│   ├── images/
+│   └── API/
+│       ├── openapi.yaml            # OpenAPI 3.1 specification
+│       ├── transformation/*.xslt   # 7× XSLT (XML → JSON)
+│       ├── json/*.json             # 7× Static JSON API responses
+│       └── json-schema/*.json      # 7× JSON Schema files
 │
 └── data/
+    ├── specification.md    # Festival concept specification
     ├── festival.xml        # Master data (60 performers, 60 events, 3 days, 2 venues)
-    ├── festival.xsd        # XML Schema with pattern/enum/range restrictions
-    └── API/
-        ├── openapi.yaml            # OpenAPI 3.1 specification
-        ├── transformation/*.xslt   # 7× XSLT (XML → JSON)
-        ├── json/*.json             # 7× Static JSON API responses
-        └── json-schema/*.json      # 7× JSON Schema files
+    └── festival.xsd        # XML Schema with pattern/enum/range restrictions
 ```
 
 ---
@@ -68,7 +71,7 @@ Static JSON files generated via XSLT from `festival.xml`, described in `openapi.
 
 | Category | Requirement                                                     | Location                   |
 | -------- | --------------------------------------------------------------- | -------------------------- |
-| Context  | specification.md                                                | `specification.md`         |
+| Context  | specification.md                                                | `data/specification.md`    |
 | Context  | Well-formed XML, 3 days, 2 venues, 60 performers, 60 events     | `data/festival.xml`        |
 | HTML     | 4 mandatory pages                                               | `web/*.html`               |
 | HTML     | Semantic structure (header/nav/main/section/article/footer)     | All HTML files             |
@@ -79,20 +82,21 @@ Static JSON files generated via XSLT from `festival.xml`, described in `openapi.
 | HTML     | Required elements: section×3+, article×3+, aside, time, address | All HTML files             |
 | HTML     | Single CSS file, no frameworks                                  | `web/style.css`            |
 | API      | XSD with pattern/enum/range restrictions + comments             | `data/festival.xsd`        |
-| API      | 7× XSLT transformations                                         | `data/API/transformation/` |
-| API      | 7× JSON outputs                                                 | `data/API/json/`           |
-| API      | 7× JSON Schema files                                            | `data/API/json-schema/`    |
-| API      | OpenAPI 3.1 (info/servers/paths/schemas/responses)              | `data/API/openapi.yaml`    |
+| API      | 7× XSLT transformations                                         | `web/API/transformation/`  |
+| API      | 7× JSON outputs                                                 | `web/API/json/`            |
+| API      | 7× JSON Schema files                                            | `web/API/json-schema/`     |
+| API      | OpenAPI 3.1 (info/servers/paths/schemas/responses)              | `web/API/openapi.yaml`     |
 
 ---
 
 ## Running Locally
 
-1. Open `data.code-workspace` in VS Code
-2. Click **Go Live** in the status bar to start Live Server
-3. Visit `http://127.0.0.1:5500/web/index.html`
+No installation, server or build step is needed.
 
-Browse API files at `http://127.0.0.1:5500/data/API/json/festival.json` etc.
+1. Unzip the project.
+2. Double-click `web/index.html`. The site opens in your browser.
+
+The static JSON API files are in `web/API/json/` and can be opened directly in a browser.
 
 ---
 
